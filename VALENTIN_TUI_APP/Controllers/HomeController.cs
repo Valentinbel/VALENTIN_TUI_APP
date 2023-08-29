@@ -15,7 +15,7 @@ namespace VALENTIN_TUI_APP.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Flight");
         }
 
         public IActionResult Privacy()

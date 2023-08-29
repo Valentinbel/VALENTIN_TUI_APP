@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+@model BusinessObjectLayer.DataBaseEntities.FlightBo;
+
+<div class="card">
+    <div class="card-title p-3">
+        <h2 class="pt-4">Create/Edit Flight</h2>
+    </div>
+    <div class="card-body">
+
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Id</label>
+                    <input id="txtid" value="@Model.Id" class="form-control" type="number" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <input type="hidden" id="hdndepartureairport" value="@Model.DepartureAirportId"/>
+                    <label>Departure Airport</label>  
+                    @Html.DropDownListFor(model => model.DepartureAirportId, Model.Airports,
+                    htmlAttributes: new { @class = "form-control", id = "ddldepartureairport"} )
+                </div>
+            </div>
+        </div>
+        <div class="row pb-3">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Arrival Airport</label>
+                    <input type="hidden" id="hdnarrivalairport" value="@Model.ArrivalAirportId" />
+                @Html.DropDownListFor(model => model.ArrivalAirportId, Model.Airports,
+                    htmlAttributes: new { @class = "form-control", id = "ddlarrivalairport"} )
+            </div>
+        </div>
+    </div>
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Distance (km)</label>
+                    <input id="txtdistance" value="@Model.Distance" class="form-control" type="text" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <a onclick="handleSave()" class="btn btn-success">Save</a>
+                    <a onclick="backtolist()" class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var departureairportid = $('#hdndepartureairport').val();
+        $('#ddldepartureairport').val(departureairportid);
+
+        var arrivalairportid = $('#hdnarrivalairport').val();
+        $('#ddlarrivalairport').val(arrivalairportid);
+    })
+
+    function backtolist() {
+        window.location.href = "/Flight";
+    }
+
+    function handleSave() {
+        var id = $('#txtid').val();
+        var departureairport = $('#ddldepartureairport').val();
+        var arrivalairport = $('#ddlarrivalairport').val();
+        var distance = $('#txtdistance').val();
+
+        var isproceed = true;
+
+        // validation
+        if (departureairport != null && departureairport != '') {
+            $('#ddldepartureairport').css('border-color', '#ccc');
+        }
+        else {
+            $('#ddldepartureairport').css('border-color', 'red');
+            isproceed = false;
+        }
+        if (arrivalairport != null && arrivalairport != '') {
+            $('#ddlarrivalairport').css('border-color', '#ccc');
+        }
+        else {
+            $('#ddlarrivalairport').css('border-color', 'red');
+            isproceed = false;
+        }
+
+        if (isproceed) {
+            var _flight = new Object();
+            _flight.Id = parseInt(id);
+            _flight.DepartureAirportId = departureairport;
+            _flight.ArrivalAirportId = arrivalairport;
+            _flight.Distance = distance;
+
+            $.ajax({
+                type: "POST",
+                url: "/Flight/Save",
+                data: _flight,
+                success: function (data) {
+                    if (data == "pass") {
+                        alert("Saved successfully!");
+                        backtolist();
+                    }
+                    else {
+                        alert("Failure due to : " + data)
+                    }
+                },
+                failure: function (err) { }
+            });
+        }
+    }
+</script>
