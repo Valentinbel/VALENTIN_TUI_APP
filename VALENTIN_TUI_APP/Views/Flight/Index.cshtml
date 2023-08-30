@@ -1,0 +1,73 @@
+﻿@model List<BusinessObjectLayer.DataBaseEntities.FlightBo>
+
+<div class="card">
+    <div class="card-body">
+        <a class="btn btn-success" asp-controller="Flight" asp-action="Create">Add New</a>
+        <h2>Flight Listing</h2>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="bg-dark text-white">
+            <tr>
+                <td>Id</td>
+                <td>Departure Airport</td>
+                <td>Arrival Airport</td>
+                <td>Distance (km)</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BusinessObjectLayer.DataBaseEntities.FlightBo item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(itemdisplay => item.Id)
+                        @Html.HiddenFor(itemdisplay => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(itemdisplay => item.DepartureAirportName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(itemdisplay => item.ArrivalAirportName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(itemdisplay => item.Distance)
+                    </td>
+                    <td>
+                        <a onclick="FuncEdit(this)" class="btn btn-primary">Edit</a> |
+                        <a onclick="FuncRemove(this)" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    function FuncEdit(element) {
+        var id = $(element).closest('tr').find('input[type=hidden]').val();
+        window.location.href = "/Flight/Edit?id=" + id;
+    }
+
+    function FuncRemove(element) {
+        var id = $(element).closest('tr').find('input[type=hidden]').val();
+
+        if (confirm("You will delete the flight with id : " + id)) {
+            $.ajax({
+                type: "DELETE",
+                url: "/Flight/Remove",
+                data: { id : id },
+                success: function (data) {
+                    if (data == "pass") {
+                        alert("The flight has been removed successfully!");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Failure due to : " + data)
+                    }
+                },
+                failure: function (err) { }
+            });
+        }
+    }
+</script>
