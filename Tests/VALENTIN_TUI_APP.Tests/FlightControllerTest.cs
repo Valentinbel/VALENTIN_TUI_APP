@@ -48,9 +48,7 @@ namespace VALENTIN_TUI_APP.Tests
         public async Task Index_ReturnView()
         {
             //Arrange
-            var flightLogicMock = new Mock<IFlightLogic>();
-            var airportLogicMock = new Mock<IAirportLogic>();
-            var controller = new FlightController(flightLogicMock.Object, airportLogicMock.Object);
+            var controller = GetFlightController();
 
             //Act
             ViewResult? result = await controller.Index() as ViewResult;
@@ -63,10 +61,7 @@ namespace VALENTIN_TUI_APP.Tests
         public async Task Index_ReturnsAllFlights()
         {
             //Arrange
-            var flightLogicMock = new Mock<IFlightLogic>();
-            var airportLogicMock = new Mock<IAirportLogic>();
-            flightLogicMock.Setup(repo => repo.GetFlights()).Returns(Task.FromResult(GetTestFlights().ToList()));
-            var controller = new FlightController(flightLogicMock.Object, airportLogicMock.Object);
+            var controller = GetFlightController();
 
             //Act
             var viewResult = await controller.Index() as ViewResult;
@@ -99,10 +94,7 @@ namespace VALENTIN_TUI_APP.Tests
         public async Task Save_ReturnsRedirectToAction()
         {
             //Arrange
-            var flightLogicMock = new Mock<IFlightLogic>();
-            var airportLogicMock = new Mock<IAirportLogic>();
-            airportLogicMock.Setup(repo => repo.GetAirportsDDL()).Returns(Task.FromResult(GetTestAirports().ToList()));
-            var controller = new FlightController(flightLogicMock.Object, airportLogicMock.Object);
+            var controller = GetFlightController();
 
             //Act
             var result = await controller.Save(new BOLDB::FlightBo
@@ -117,6 +109,14 @@ namespace VALENTIN_TUI_APP.Tests
 
             //Assert
             Assert.AreEqual(null, result);
+        }
+        private FlightController GetFlightController()
+        {
+            var flightLogicMock = new Mock<IFlightLogic>();
+            var airportLogicMock = new Mock<IAirportLogic>();
+            airportLogicMock.Setup(repo => repo.GetAirportsDDL()).Returns(Task.FromResult(GetTestAirports().ToList()));
+            var controller = new FlightController(flightLogicMock.Object, airportLogicMock.Object);
+            return controller;
         }
 
         //[TestMethod]
