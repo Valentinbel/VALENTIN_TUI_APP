@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VALENTIN_TUI_APP", "VALENTIN_TUI_APP\VALENTIN_TUI_APP.csproj", "{E2FF4861-40C6-4044-856A-41F5816E92EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VALENTIN_TUI_APP", "VALENTIN_TUI_APP\VALENTIN_TUI_APP.csproj", "{E2FF4861-40C6-4044-856A-41F5816E92EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjectLayer", "BusinessObjectLayer\BusinessObjectLayer.csproj", "{14BA780D-7C5B-4438-B7CA-E2AFF8AF12DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObjectLayer", "BusinessObjectLayer\BusinessObjectLayer.csproj", "{14BA780D-7C5B-4438-B7CA-E2AFF8AF12DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{26B25B3C-CA1E-4A01-BC49-706606095994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{26B25B3C-CA1E-4A01-BC49-706606095994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{B3AA1BFB-BE1D-47FC-ADB5-68CE0AD14AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{B3AA1BFB-BE1D-47FC-ADB5-68CE0AD14AE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF86909B-2BAF-4587-858B-6387BB6FE1D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VALENTIN_TUI_APP.Tests", "Tests\VALENTIN_TUI_APP.Tests\VALENTIN_TUI_APP.Tests.csproj", "{13015287-A9CA-4F32-8160-669450D9BE1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +37,16 @@ Global
 		{B3AA1BFB-BE1D-47FC-ADB5-68CE0AD14AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3AA1BFB-BE1D-47FC-ADB5-68CE0AD14AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3AA1BFB-BE1D-47FC-ADB5-68CE0AD14AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13015287-A9CA-4F32-8160-669450D9BE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13015287-A9CA-4F32-8160-669450D9BE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13015287-A9CA-4F32-8160-669450D9BE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13015287-A9CA-4F32-8160-669450D9BE1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13015287-A9CA-4F32-8160-669450D9BE1C} = {DF86909B-2BAF-4587-858B-6387BB6FE1D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19146067-0F03-4753-83B3-1A3626E27F10}

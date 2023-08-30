@@ -27,7 +27,7 @@ namespace VALENTIN_TUI_APP.Controllers
             return View(flight);
         }
 
-        public async Task<IActionResult> Edit(string id) 
+        public async Task<IActionResult> Edit(int? id) 
         {
             BOLDB::FlightBo flight = await _flighLogic.GetFlightById(Convert.ToInt32(id));
             flight.Airports = await PopulateAirports();
@@ -40,13 +40,13 @@ namespace VALENTIN_TUI_APP.Controllers
             return Json(Response);
         }
 
-        public async Task<IActionResult> Remove(string id)
+        public async Task<IActionResult> Remove(int id)
         {
             string Response = await _flighLogic.RemoveFlight(Convert.ToInt32(id));
             return Json(Response);
         }
 
-        private async Task<SelectList> PopulateAirports()
+        public async Task<SelectList> PopulateAirports()
         {
             List<BOLDB::AirportBo> airports = await _airportLogic.GetAirportsDDL();
             IEnumerable<SelectListItem> airportslist = new SelectList(airports, "Id", "Name");
